@@ -27,6 +27,14 @@ argon2 = ["argon2-cffi (>=16.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+category = "main"
+description = "A filterset and filters."
+name = "django-filters"
+optional = false
+python-versions = "*"
+version = "0.2.1"
+
+[[package]]
 category = "dev"
 description = "Discover and load entry points from installed packages."
 name = "entrypoints"
@@ -89,7 +97,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.3.0"
 
 [metadata]
-content-hash = "da37611ef6a74b07a70d9c3a3b212cf53377bcc2239d91d526359d2a84ceb82e"
+content-hash = "c0b23b9234cff1d53aad1dd682c274a3763d84c6ec5face2fa89cc810b90f876"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -100,6 +108,9 @@ asgiref = [
 django = [
     {file = "Django-3.0.3-py3-none-any.whl", hash = "sha256:c91c91a7ad6ef67a874a4f76f58ba534f9208412692a840e1d125eb5c279cb0a"},
     {file = "Django-3.0.3.tar.gz", hash = "sha256:2f1ba1db8648484dd5c238fb62504777b7ad090c81c5f1fd8d5eb5ec21b5f283"},
+]
+django-filters = [
+    {file = "django-filters-0.2.1.zip", hash = "sha256:1a9799a41106dc53ed894e952a24e8dee9b4fb37f010f22d178c09c90c61d711"},
 ]
 entrypoints = [
     {file = "entrypoints-0.3-py2.py3-none-any.whl", hash = "sha256:589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19"},

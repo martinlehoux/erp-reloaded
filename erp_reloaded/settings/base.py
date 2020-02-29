@@ -11,7 +11,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-THIRD_PARTTY_APPS = [
+THIRD_PARTY_APPS = [
     'django_filters',
 ]
 
