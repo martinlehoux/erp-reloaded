@@ -1,0 +1,40 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      DJANGO_SETTINGS_MODULE: erp_reloaded.settings.test
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Setup Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Install coverage
+      run: pip install coverage
+    - name: Test
+      run: coverage run manage.py test
+    - name: Coverage
+      run: coverage report
+  
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.7'
+      - name: Install flake8 and isort
+        run: pip install flake8 isort
+      - name: Lint
+        run: python -m flake8
+      - name: Lint imports
+        run: isort --diff --skip migrations
