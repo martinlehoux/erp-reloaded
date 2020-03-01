@@ -3,20 +3,14 @@
 {% block main %}
 {% with user.groups.all as user_groups %}
 
+{% with False as your_profile %}
 {% include 'user/user_detail.html' %}
-
 {% include 'user/user_show_modal.html' %}
+{% endwith %}
+
 
 <script>
-$('#edit-user-button').click(() => $('.ui.modal').modal('show'))
-{% for title, error in form.errors.items %}
-$('body').toast({
-  class: 'error',
-  title: '{{title}}',
-  message: '{{error}}',
-  displayTime: 0,
-})
-{% endfor %}
+$('#edit-user-button').click(() => $('#edit-user-modal').modal('show'))
 </script>
 {% endwith %}
 {% endblock main %}

@@ -15,7 +15,11 @@
     <tr>
       <td><a href="{% url 'user:show' user.id %}">@{{user.username}}</a></td>
       <td>{{user.first_name}} {{user.last_name}}</td>
-      <td></td>
+      <td>
+      {% for group in user.groups.all %}
+        <div class="ui label">{{group.name|capfirst}}</div>
+      {% endfor %}
+      </td>
     </tr>
   {% endfor %}
   </tbody>

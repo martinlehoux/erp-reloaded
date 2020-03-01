@@ -1,6 +1,15 @@
-<div class="ui segment">
+<div class="ui segment {% if not user.is_active %}orange disabled{% endif %}">
   <h2 class="ui header">
-    {{user.first_name}} {{user.last_name}}'s profile
+    {% if not user.is_active %}
+      <span class="ui orange label">Inactive</span>
+    {% else %}
+      <span class="ui green label">Active</span>
+    {% endif %}
+    {% if your_profile %}
+      Your profile
+    {% else %}
+      {{user.first_name}} {{user.last_name}}'s profile
+    {% endif %}
     <button id="edit-user-button" class="ui right floated button">Edit</button>
   </h2>
   <div class="ui items">
@@ -15,13 +24,14 @@
       <div class="content">
         <p class="header">{{user.first_name}} {{user.last_name}}</p>
         <div class="meta">
+          <i class="user circle icon"></i>
           <span>{{user.username}}</span>
         </div>
         <div class="description">
           <p><i class="envelope icon"></i>{{user.email}}</p>
           <p><i class="phone icon"></i>{{user.phone_number}}</p>
           <p><i class="medkit icon"></i>{{social_security_number}}</p>
-          <p><i></i>In charge from {{user.date_joined|date}} to {{user.date_left|date|default:"(still active)"}}</p>
+          <p><i class="business time icon"></i>In charge from {{user.date_joined|date}} to {{user.date_left|date|default:"-"}}</p>
           <div class="ui labels">
             <i class="users icon"></i>
             {% for group in user_groups %}
@@ -30,15 +40,23 @@
           </div>
         </div>
         <div class="extra">
-            Additional Details
+          <i class="book icon"></i>
+          {{user.biography|default:"No biography"}}
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="ui segment">
-  <h2 class="ui header">{{user.first_name}} {{user.last_name}}'s documents</h2>
+<div class="ui segment {% if not user.is_active %}orange disabled{% endif %}">
+  <h2 class="ui header">
+    {% if your_profile %}
+      Your documents
+      <button id="upload-user-button" class="ui right floated button">Upload</a>
+    {% else %}
+      {{user.first_name}} {{user.last_name}}'s documents
+    {% endif %}
+    </h2>
   <div>
   {% for document in user.document_set.all %}
     <a href="{{MEDIA_URL}}{{document.file}}" class="ui labeled icon button">

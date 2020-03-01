@@ -1,7 +1,7 @@
-<div class="ui modal">
+<div class="ui modal" id="edit-user-modal">
   <div class="header">Edit {{user.first_name}} {{user.last_name}} profile</div>
   <div class="content">
-    <form id="edit-user-form" action="{% url 'user:show' user.pk %}" method="POST" class="ui form">
+    <form id="edit-user-form" action="{% url 'user:show' user.pk %}" method="post" class="ui form">
     {% csrf_token %}
       <div class="field">
         <label for="groups">Groups</label>

@@ -30,6 +30,7 @@ class User(AbstractUser):
     social_security_number = models.CharField(max_length=64, blank=True)
     phone_number = PhoneNumberField(blank=True, null=True)
     date_left = models.DateField(null=True, blank=True)
+    biography = models.TextField(blank=True)
 
     def get_absolute_url(self):
         return reverse('user:show', kwargs={'pk': self.pk})
@@ -47,6 +48,9 @@ class Document(models.Model):
     name = models.ForeignKey(to='user.DocumentName', on_delete=models.PROTECT)
     user = models.ForeignKey(to='user.User', on_delete=models.CASCADE)
     file = models.FileField(upload_to=upload_document_to)
+
+    class Meta:
+        unique_together = ('name', 'user')
 
     def __str__(self):
         return f"{self.user} - {self.name}"

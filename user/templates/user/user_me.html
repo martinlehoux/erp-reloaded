@@ -3,12 +3,16 @@
 {% block main %}
 {% with user.groups.all as user_groups %}
 
+{% with True as your_profile %}
 {% include 'user/user_detail.html' %}
+{% include 'user/user_me_modal.html' %}
+{% include 'user/user_upload_modal.html' %}
+{% endwith %}
 
-{% comment %} {% include 'user/user_me_modal.html' %} {% endcomment %}
 
 <script>
-$('#edit-user-button').click(() => $('.ui.modal').modal('show'))
+$('#edit-user-button').click(() => $('#edit-user-modal').modal('show'))
+$('#upload-user-button').click(() => $('#upload-user-modal').modal('show'))
 </script>
 {% endwith %}
 {% endblock main %}
