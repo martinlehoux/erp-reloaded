@@ -46,10 +46,10 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'django.server',
         },
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-        }
+        # 'mail_admins': {
+        #     'level': 'ERROR',
+        #     'class': 'django.utils.log.AdminEmailHandler',
+        # }
     },
     'loggers': {
         'django.server': {
@@ -57,7 +57,7 @@ LOGGING = {
             'level': 'INFO',
         },
         'django': {
-            'handlers': ['mail_admins', 'django.server'],
+            'handlers': ['django.server'],
             'level': 'ERROR',
         },
     }
