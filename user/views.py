@@ -1,12 +1,11 @@
-from django.contrib.auth.models import Group
-from django.urls import reverse_lazy, reverse
-from django.shortcuts import redirect
-from django.views.generic import DeleteView, ListView, UpdateView, CreateView
 from django.contrib import messages
+from django.contrib.auth.models import Group
+from django.shortcuts import redirect
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DeleteView, ListView, UpdateView
 
-
-from user.models import User, Document, DocumentName
 from user.forms import UploadDocumentForm
+from user.models import Document, DocumentName, User
 
 
 class UserList(ListView):
@@ -39,6 +38,7 @@ class UserMe(UpdateView):
         context['document_name_set'] = DocumentName.objects.all()
         return context
 
+
 # TODO: Protected and served by nginx
 def upload_document(request):
     if request.method != 'POST':
@@ -55,7 +55,7 @@ def upload_document(request):
     document = form.save()
     messages.success(request, f"Uploaded {document.name}")
     return redirect(reverse('user:me'))
-    
+
 
 class UserDelete(DeleteView):
     model = User
