@@ -8,10 +8,19 @@ from user.forms import UploadDocumentForm
 from user.models import Document, DocumentName, User
 
 
-class UserList(ListView):
-    queryset = User.objects.all()
+class UserActiveList(ListView):
+    queryset = User.objects.filter(is_active=True)
     context_object_name = 'user_set'
+    template_name = 'user/user_list_active.html'
+    ordering = ['username']
 
+
+class UserArchiveList(ListView):
+    queryset = User.objects.filter(is_active=False)
+    paginate_by = 25
+    context_object_name = 'user_set'
+    template_name = 'user/user_list_archive.html'
+    ordering = ['-date_left']
 
 class UserShow(UpdateView):
     model = User
@@ -28,7 +37,10 @@ class UserShow(UpdateView):
 class UserMe(UpdateView):
     template_name = 'user/user_me.html'
     context_object_name = 'user'
-    fields = ['first_name', 'last_name', 'email', 'phone_number', 'social_security_number', 'biography']
+    fields = ['first_name', 'last_name', 'email', 'phone_number', 'social_security_number', 'biography', 'photo']
+
+    def get_success_url(self):
+        return reverse('user:me')
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -59,4 +71,4 @@ def upload_document(request):
 
 class UserDelete(DeleteView):
     model = User
-    success_url = reverse_lazy('user:list')
+    success_url = reverse_lazy('user:list-active')

@@ -1,7 +1,7 @@
 <div class="ui modal" id="edit-user-modal">
   <div class="header">Edit {{user.first_name}} {{user.last_name}} profile</div>
   <div class="scrolling content">
-    <form id="edit-user-form" action="{% url 'user:me' %}" method="post" class="ui form">
+    <form id="edit-user-form" action="{% url 'user:me' %}" method="post" class="ui form" enctype="multipart/form-data">
     {% csrf_token %}
       <div class="field">
         <label for="first_name">First name</label>
@@ -10,6 +10,13 @@
       <div class="field">
         <label for="last_name">Last name</label>
         <input type="text" name="last_name" value="{{user.last_name}}">
+      </div>
+      <div class="field">
+        <label for="photo" class="ui icon button">
+          <i class="file image icon"></i>
+          Photo
+        </label>
+        <input type="file" id="photo" style="display:none" name="photo">
       </div>
       <div class="field">
         <label for="email">Email</label>

@@ -1,0 +1,50 @@
+{% extends 'user/base.html' %}
+
+{% block main %}
+<div class="ui horizontal divider">User archive</div>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Groups</th>
+      <th>Date left</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in user_set %}
+    <tr>
+      <td><a href="{% url 'user:show' user.id %}">@{{user.username}}</a></td>
+      <td>{{user.first_name}} {{user.last_name}}</td>
+      <td>
+      {% for group in user.groups.all %}
+        <div class="ui label">{{group.name|capfirst}}</div>
+      {% endfor %}
+      </td>
+      <td>{{user.date_left}}</td>
+    </tr>
+  {% endfor %}
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        <div class="ui pagination menu">
+          {% if page_obj.has_previous %}
+          <a class="item" href="?page=1">1</a>
+          <a class="item" href="?page={{ page_obj.previous_page_number }}"><i class="angle left icon"></i></a>
+          {% endif %}
+
+          <div class="active item">{{ page_obj.number }}</div>
+
+          {% if page_obj.paginator.num_pages > page_obj.number %}
+          {% if page_obj.has_next %}
+          <a class="item" href="?page={{ page_obj.next_page_number }}"><i class="angle right icon"></i></a>
+          {% endif %}
+          <a class="item" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+          {% endif %}
+        </div>
+      </td>
+    </tr>
+  </tfoot>
+  </tbody>
+</table>
+{% endblock main %}

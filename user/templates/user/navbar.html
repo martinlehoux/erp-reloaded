@@ -1,4 +1,10 @@
 <nav class="ui two item menu">
-    <a href="{% url 'user:list' %}" class="item">Users</a>
-    <a href="{% url 'admin:index' %}" class="item">Admin</a>
+  <a href="{% url 'user:list-active' %}" class="item">
+    <i class="users icon"></i>
+    Users
+  </a>
+  <a href="{% url 'admin:index' %}" class="item">
+    <i class="cogs icon"></i>
+    Admin
+  </a>
 </nav>
