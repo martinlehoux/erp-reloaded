@@ -1,7 +1,8 @@
 from django.urls import path
 from django.views.generic import RedirectView
 
-from user.views import UserDelete, UserActiveList, UserMe, UserShow, upload_document, UserArchiveList
+from user.views import (UserActiveList, UserArchiveList, UserDelete, UserMe,
+                        UserShow, upload_document)
 
 app_name = 'user'
 urlpatterns = [

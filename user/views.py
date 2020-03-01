@@ -22,6 +22,7 @@ class UserArchiveList(ListView):
     template_name = 'user/user_list_archive.html'
     ordering = ['-date_left']
 
+
 class UserShow(UpdateView):
     model = User
     template_name = 'user/user_show.html'
