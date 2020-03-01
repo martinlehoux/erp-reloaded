@@ -8,7 +8,7 @@ omit =
     shopping_ms/wsgi.py
     manage.py
     **/migrations/*.py
-fail_under = 90
+fail_under = 60
 show_missing = True
 skip_covered = True
 # “Name”, “Stmts”, “Miss”, “Branch”, “BrPart”, or “Cover”
