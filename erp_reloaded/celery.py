@@ -1,7 +1,8 @@
 import os
 
-from celery import Celery
 from django.apps import apps
+
+from celery import Celery
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'erp_reloaded.settings.dev')
 app = Celery('erp_reloaded')

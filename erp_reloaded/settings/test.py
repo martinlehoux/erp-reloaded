@@ -3,7 +3,6 @@ import os
 from erp_reloaded.settings.base import *  # noqa: F401
 from erp_reloaded.settings.base import BASE_DIR
 
-
 DEBUG = False
 ALLOWED_HOSTS = []
 TIME_ZONE = 'America/Los_Angeles'
