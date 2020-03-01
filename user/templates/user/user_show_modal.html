@@ -1,0 +1,45 @@
+<div class="ui modal">
+  <div class="header">Edit {{user.first_name}} {{user.last_name}} profile</div>
+  <div class="content">
+    <form id="edit-user-form" action="{% url 'user:show' user.pk %}" method="POST" class="ui form">
+    {% csrf_token %}
+      <div class="field">
+        <label for="groups">Groups</label>
+        <select name="groups" multiple="" class="ui fluid dropdown">
+          <option value="">Groups</option>
+          {% for group in groups %}
+          <option value="{{group.pk}}" {% if group in user_groups %}selected{% endif %}>{{group.name|capfirst}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" name="is_active" {% if user.is_active %}checked{% endif %}>
+          <label>User is active</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui calendar">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input type="text" placeholder="Date left" name="date_left" value="{{user.date_left}}">
+            <button type="button" class="ui icon button" onclick="$('.ui.calendar').calendar({type: 'date', today: true})">
+              <i class="redo icon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <button class="ui negative button">Cancel</button>
+    <input class="ui positive button" type="submit" form="edit-user-form"/>
+  </div>
+</div>
+<script>
+$('.ui.dropdown').dropdown()
+$('.ui.calendar').calendar({
+  type: 'date',
+  today: true,
+})
+</script>

@@ -1,0 +1,22 @@
+{% extends 'user/base.html' %}
+
+{% block main %}
+{% with user.groups.all as user_groups %}
+
+{% include 'user/user_detail.html' %}
+
+{% include 'user/user_show_modal.html' %}
+
+<script>
+$('#edit-user-button').click(() => $('.ui.modal').modal('show'))
+{% for title, error in form.errors.items %}
+$('body').toast({
+  class: 'error',
+  title: '{{title}}',
+  message: '{{error}}',
+  displayTime: 0,
+})
+{% endfor %}
+</script>
+{% endwith %}
+{% endblock main %}

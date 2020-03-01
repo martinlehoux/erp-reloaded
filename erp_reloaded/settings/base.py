@@ -71,7 +71,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
-USE_L10N = True
+# TODO: Configure correctly date formating anf localization
+USE_L10N = False
+DATE_INPUT_FORMATS = ["%B %d, %Y"]
 USE_TZ = True
 
 STATIC_URL = '/static/'

@@ -1,0 +1,14 @@
+{% extends 'user/base.html' %}
+
+{% block main %}
+{% with user.groups.all as user_groups %}
+
+{% include 'user/user_detail.html' %}
+
+{% comment %} {% include 'user/user_me_modal.html' %} {% endcomment %}
+
+<script>
+$('#edit-user-button').click(() => $('.ui.modal').modal('show'))
+</script>
+{% endwith %}
+{% endblock main %}

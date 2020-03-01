@@ -1,8 +1,8 @@
-{% extends 'user/base.html' %}
-
-{% block main %}
 <div class="ui segment">
-  <h2 class="ui header">{{user.first_name}} {{user.last_name}}'s profile</h2>
+  <h2 class="ui header">
+    {{user.first_name}} {{user.last_name}}'s profile
+    <button id="edit-user-button" class="ui right floated button">Edit</button>
+  </h2>
   <div class="ui items">
     <div class="ui item">
       <div class="image">
@@ -21,10 +21,11 @@
           <p><i class="envelope icon"></i>{{user.email}}</p>
           <p><i class="phone icon"></i>{{user.phone_number}}</p>
           <p><i class="medkit icon"></i>{{social_security_number}}</p>
+          <p><i></i>In charge from {{user.date_joined|date}} to {{user.date_left|date|default:"(still active)"}}</p>
           <div class="ui labels">
             <i class="users icon"></i>
-            {% for group in user.groups.all %}
-              <div class="ui label">{{group.name}}</div>
+            {% for group in user_groups %}
+              <div class="ui label">{{group.name|capfirst}}</div>
             {% endfor %}
           </div>
         </div>
@@ -39,7 +40,11 @@
 <div class="ui segment">
   <h2 class="ui header">{{user.first_name}} {{user.last_name}}'s documents</h2>
   <div>
-  {% for document in user.document_set %}{% endfor %}
+  {% for document in user.document_set.all %}
+    <a href="{{MEDIA_URL}}{{document.file}}" class="ui labeled icon button">
+      <i class="{{document.name.icon}} icon"></i>
+      {{document.name|upper}}
+    </a>
+  {% endfor %}
   </div>
 </div>
-{% endblock main %}
