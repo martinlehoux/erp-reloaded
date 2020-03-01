@@ -1,0 +1,45 @@
+{% extends 'user/base.html' %}
+
+{% block main %}
+<div class="ui segment">
+  <h2 class="ui header">{{user.first_name}} {{user.last_name}}'s profile</h2>
+  <div class="ui items">
+    <div class="ui item">
+      <div class="image">
+      {% if user.photo %}
+        <img src="{{MEDIA_URL}}{{user.photo}}" alt="User photo" class="ui small image">
+      {% else %}
+        <img src="{{MEDIA_URL}}/user/anonymous-user.png" alt="Anonymous user photo" class="ui small image">
+      {% endif %}
+      </div>
+      <div class="content">
+        <p class="header">{{user.first_name}} {{user.last_name}}</p>
+        <div class="meta">
+          <span>{{user.username}}</span>
+        </div>
+        <div class="description">
+          <p><i class="envelope icon"></i>{{user.email}}</p>
+          <p><i class="phone icon"></i>{{user.phone_number}}</p>
+          <p><i class="medkit icon"></i>{{social_security_number}}</p>
+          <div class="ui labels">
+            <i class="users icon"></i>
+            {% for group in user.groups.all %}
+              <div class="ui label">{{group.name}}</div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="extra">
+            Additional Details
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui segment">
+  <h2 class="ui header">{{user.first_name}} {{user.last_name}}'s documents</h2>
+  <div>
+  {% for document in user.document_set %}{% endfor %}
+  </div>
+</div>
+{% endblock main %}

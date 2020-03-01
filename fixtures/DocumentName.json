@@ -1,0 +1,30 @@
+[
+    {
+        "model": "user.documentname",
+        "pk": 1,
+        "fields": {
+            "name": "proof of identity"
+        }
+    },
+    {
+        "model": "user.documentname",
+        "pk": 2,
+        "fields": {
+            "name": "bank details"
+        }
+    },
+    {
+        "model": "user.documentname",
+        "pk": 3,
+        "fields": {
+            "name": "social security card"
+        }
+    },
+    {
+        "model": "user.documentname",
+        "pk": 4,
+        "fields": {
+            "name": "school certificate"
+        }
+    }
+]

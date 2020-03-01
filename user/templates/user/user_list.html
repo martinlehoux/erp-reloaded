@@ -1,0 +1,23 @@
+{% extends 'user/base.html' %}
+
+{% block main %}
+<div class="ui horizontal divider">Active Team</div>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Groups</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for user in user_set %}
+    <tr>
+      <td><a href="{% url 'user:show' user.id %}">@{{user.username}}</a></td>
+      <td>{{user.first_name}} {{user.last_name}}</td>
+      <td></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock main %}

@@ -13,9 +13,12 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'django_filters',
+    'phonenumber_field',
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    'user.apps.UserConfig'
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -42,6 +45,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -49,6 +53,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'erp_reloaded.wsgi.application'
 
+AUTH_USER_MODEL = 'user.User'
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
