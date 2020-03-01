@@ -1,4 +1,5 @@
 # erp-reloaded
+![CI](https://github.com/martinlehoux/erp-reloaded/workflows/CI/badge.svg)
 A full Django 3.0 ERP software
 
 ## Development
