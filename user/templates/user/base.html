@@ -34,7 +34,6 @@
   {% for message in messages %}
   <script>
   $('body').toast({
-    class: '{{message.tags|first}}'
     message: '{{message}}',
     displayTime: 0,
   })

@@ -1,3 +1,4 @@
+{% load static %}
 <div class="ui segment {% if not user.is_active %}orange disabled{% endif %}">
   <h2 class="ui header">
     {% if not user.is_active %}
@@ -18,7 +19,7 @@
       {% if user.photo %}
         <img src="{{MEDIA_URL}}{{user.photo}}" alt="User photo" class="ui small image">
       {% else %}
-        <img src="{{MEDIA_URL}}/user/anonymous-user.png" alt="Anonymous user photo" class="ui small image">
+        <img src="{% static 'user/img/anonymous-user.png' %}" alt="Anonymous user photo" class="ui small image">
       {% endif %}
       </div>
       <div class="content">
