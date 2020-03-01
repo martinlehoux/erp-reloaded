@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 from user.models import User
@@ -12,4 +11,3 @@ class UserList(ListView):
 class UserDetail(DetailView):
     model = User
     context_object_name = 'user'
-
