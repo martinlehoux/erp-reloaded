@@ -1,10 +1,10 @@
-from django.views.generic import ListView, CreateView, UpdateView
-from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, UpdateView
 
-from customer.models import Customer, ActivityArea, BusinessSize, Country, Contact
 from customer.forms import ContactForm
+from customer.models import ActivityArea, BusinessSize, Country, Customer
 
 
 class ListCustomer(ListView):
@@ -25,6 +25,7 @@ class CreateCustomer(CreateView):
         context['business_size_set'] = BusinessSize.objects.all()
         context['country_set'] = Country.objects.all()
         return context
+
 
 class ShowCustomer(UpdateView):
     model = Customer

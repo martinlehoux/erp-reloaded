@@ -1,4 +1,5 @@
 import os
+
 from django.db import models
 from django.shortcuts import reverse
 from phonenumber_field.modelfields import PhoneNumberField
@@ -35,7 +36,6 @@ class Customer(models.Model):
         if not self.address or not self.zip_code or not self.city:
             problems.append("Customer address incomplete")
         return problems
-    
 
 
 class Country(models.Model):
@@ -43,7 +43,6 @@ class Country(models.Model):
     # https://fomantic-ui.com/elements/flag.html
     icon = models.CharField(max_length=8, blank=True)
     value_added_tax = models.DecimalField(decimal_places=4, max_digits=5, default='0.2000')
-
 
     def __str__(self):
         return self.name
@@ -74,4 +73,3 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.customer})"
-    

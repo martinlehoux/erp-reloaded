@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from customer.models import Customer, Country, ActivityArea, BusinessSize, Contact
-
+from customer.models import (ActivityArea, BusinessSize, Contact, Country,
+                             Customer)
 
 admin.site.register(Customer)
 admin.site.register(Country)

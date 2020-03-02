@@ -1,8 +1,8 @@
 from django.urls import path
 from django.views.generic import RedirectView
 
-from customer.views import ListCustomer, CreateCustomer, ShowCustomer, create_contact
-
+from customer.views import (CreateCustomer, ListCustomer, ShowCustomer,
+                            create_contact)
 
 app_name = 'customer'
 urlpatterns = [

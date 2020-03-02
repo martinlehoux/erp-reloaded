@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
-from django.views.generic import DeleteView, ListView, UpdateView
+from django.urls import reverse
+from django.views.generic import ListView, UpdateView
 
 from user.forms import UploadDocumentForm
 from user.models import Document, DocumentName, User
