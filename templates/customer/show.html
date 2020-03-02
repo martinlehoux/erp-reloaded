@@ -1,0 +1,76 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% load extras %}
+
+{% block view %}
+
+<div class="ui segment">
+  <h2 class="ui header">
+    {{customer.name}}
+    <button id="edit-customer-button" class="ui right floated button">Edit</button>
+  </h2>
+
+  <div class="ui items">
+    <div class="ui item">
+      <div class="image">
+      {% if customer.logo %}
+        <img src="{{MEDIA_URL}}{{customer.logo}}" alt="User photo" class="ui small right floated image">
+      {% else %}
+        <img src="{% static 'customer/img/default-customer.png' %}" alt="Default customer logo" class="ui small right floated image">
+      {% endif %}
+      </div>
+      <div class="content">
+        <p class="header">{{customer.name}}</p>
+        <div class="description">
+          <p><i class="chrome icon"></i><a href="{{customer.website}}">{{customer.website}}</a></p>
+          <p>
+            <i class="certificate icon"></i>
+            {% for activity_area in customer.activity_area_set.all %}
+            <span class="ui label">{{activity_area.name}}</span>
+            {% endfor %}
+          </p>
+          <p><i class="expand icon"></i>{{customer.size}}</p>
+          <p><i class="funnel dollar icon"></i>{{customer.country.value_added_tax|perc}} VAD</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui item">
+      <div class="content">
+        <p class="header"><i class="map marked icon"></i>Address</p>
+        <div class="description">
+          <p><i class="map marker icon"></i>{{customer.address|default:"No street"}}</p>
+          <p>{{customer.zip_code|default:"No zip code"}}</p>
+          <p><i class="city icon"></i>{{customer.city|default:"No city"}}</p>
+          <p><i class="{{customer.country.icon}} flag"></i>{{customer.country}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui segment">
+  <h2 class="ui header">Contacts</h2>
+  <div class="ui cards">
+  {% for contact in customer.contact_set.all %}
+    {% include 'customer/elements/contact-card.html' %}
+  {% endfor %}
+    <div class="card">
+      <div class="content">
+        <div class="center aligned header">Create contact</div>
+      </div>
+      <div class="center aligned content">
+        <button id="create-contact-button" class="ui icon button"><i class="add icon"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'customer/modals/create-contact.html' %}
+{% include 'customer/modals/edit.html' %}
+
+<script>
+$('#create-contact-button').click(() => $('#create-contact-modal').modal('show'))
+$('#edit-customer-button').click(() => $('#edit-customer-modal').modal('show'))
+</script>
+{% endblock view %}

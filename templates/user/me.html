@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'user/base.html' %}
 
-{% block main %}
+{% block view %}
 {% with user.groups.all as user_groups %}
 
 {% with True as your_profile %}
-{% include 'user/user_detail.html' %}
-{% include 'user/user_me_modal.html' %}
-{% include 'user/user_upload_modal.html' %}
+{% include 'user/detail.html' %}
+{% include 'user/modals/me.html' %}
+{% include 'user/modals/upload.html' %}
 {% endwith %}
 
 
@@ -15,4 +15,4 @@ $('#edit-user-button').click(() => $('#edit-user-modal').modal('show'))
 $('#upload-user-button').click(() => $('#upload-user-modal').modal('show'))
 </script>
 {% endwith %}
-{% endblock main %}
+{% endblock view %}

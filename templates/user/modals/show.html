@@ -8,7 +8,7 @@
         <select name="groups" multiple="" class="ui fluid dropdown">
           <option value="">Groups</option>
           {% for group in groups %}
-          <option value="{{group.pk}}" {% if group in user_groups %}selected{% endif %}>{{group.name|capfirst}}</option>
+          <option value="{{group.pk}}" {% if group in user_groups %}selected{% endif %}>{{group.name}}</option>
           {% endfor %}
         </select>
       </div>
@@ -37,7 +37,6 @@
   </div>
 </div>
 <script>
-$('.ui.dropdown').dropdown()
 $('.ui.calendar').calendar({
   type: 'date',
   today: true,

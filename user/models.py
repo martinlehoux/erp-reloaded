@@ -35,6 +35,17 @@ class User(AbstractUser):
     def get_absolute_url(self):
         return reverse('user:show', kwargs={'pk': self.pk})
 
+    @property
+    def issues(self):
+        problems = []
+        if not self.social_security_number:
+            problems.append("Missing social security number")
+        if not self.phone_number:
+            problems.append("Missing phone number")
+        if not self.email:
+            problems.append("Missing email")
+        return problems
+
 
 class DocumentName(models.Model):
     name = models.CharField(max_length=64)

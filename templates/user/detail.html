@@ -13,6 +13,7 @@
     {% endif %}
     <button id="edit-user-button" class="ui right floated button">Edit</button>
   </h2>
+
   <div class="ui items">
     <div class="ui item">
       <div class="image">
@@ -29,14 +30,14 @@
           <span>{{user.username}}</span>
         </div>
         <div class="description">
-          <p><i class="envelope icon"></i>{{user.email}}</p>
+          <p><i class="envelope icon"></i><a href="mailto:{{user.email}}">{{user.email}}</a></p>
           <p><i class="phone icon"></i>{{user.phone_number}}</p>
           <p><i class="medkit icon"></i>{{user.social_security_number}}</p>
           <p><i class="business time icon"></i>In charge from {{user.date_joined|date}} to {{user.date_left|date|default:"-"}}</p>
           <div class="ui labels">
             <i class="users icon"></i>
             {% for group in user_groups %}
-              <div class="ui label">{{group.name|capfirst}}</div>
+              <span class="ui label">{{group.name}}</span>
             {% endfor %}
           </div>
         </div>
