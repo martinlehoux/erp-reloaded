@@ -1,0 +1,8 @@
+<div class="field">
+  <select name="{{field.name}}" id="{{field.name}}" class="ui {% if field.clearable %}clearable{% endif %} dropdown">
+    <option value="">{{field.name|capfirst}}</option>
+    {% for option in field.options %}
+    <option value="{{option.id}}">{{option}}</option>
+    {% endfor %}
+  </select>
+</div>

@@ -2,16 +2,35 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView
+from django_filters import views, FilterSet
 
+from erp_reloaded.forms import InputField, SelectField, CountrySelectField, SubmitField, SearchForm
 from customer.forms import ContactForm
 from customer.models import ActivityArea, BusinessSize, Country, Customer
 
 
-class ListCustomer(ListView):
+class FilterCustomer(FilterSet):
+    class Meta:
+        model = Customer
+        fields = ['name', 'size', 'country']
+
+
+class ListCustomer(views.FilterView):
     queryset = Customer.objects.all()
     context_object_name = 'customer_set'
     template_name = 'customer/list.html'
+    filterset_class = FilterCustomer
     ordering = ['name']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_form'] = SearchForm([
+            InputField('name'),
+            SelectField('size', options=BusinessSize.objects.all()),
+            CountrySelectField("country", options=Country.objects.all(), clearable=True),
+        ])
+        
+        return context
 
 
 class CreateCustomer(CreateView):

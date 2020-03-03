@@ -3,9 +3,17 @@ from django.contrib.auth.models import Group
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import ListView, UpdateView
+from django_filters import views, FilterSet
 
+from erp_reloaded.forms import InputField, SelectField, CountrySelectField, SubmitField, SearchForm
 from user.forms import UploadDocumentForm
 from user.models import Document, DocumentName, User
+
+
+class FilterUser(FilterSet):
+    class Meta:
+        model = User
+        fields = ['username']
 
 
 class ListActiveUser(ListView):
@@ -15,13 +23,21 @@ class ListActiveUser(ListView):
     ordering = ['username']
 
 
-class ListArchiveUser(ListView):
+class ListArchiveUser(views.FilterView):
     queryset = User.objects.filter(is_active=False)
     paginate_by = 25
     context_object_name = 'user_set'
     template_name = 'user/list-archive.html'
+    filterset_class = FilterUser
     ordering = ['-date_left']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = SearchForm([
+            InputField('name'),
+        ])
+        return context
+    
 
 class ShowUser(UpdateView):
     model = User

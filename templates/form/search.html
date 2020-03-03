@@ -1,0 +1,12 @@
+<div class="ui segment">
+  <form class="ui form" action="" method="get">
+    <div class="equal width fields">
+      {% for field in search_form.fields %}
+        {% include field.template %}
+      {% endfor %}
+      {% with search_form.submit_field as field %}
+        {% include field.template %}
+      {% endwith %}
+    </div>
+  </form>
+</div>
