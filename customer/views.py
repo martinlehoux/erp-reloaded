@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView
-from django_filters import views, FilterSet
+from django.views.generic import CreateView, UpdateView
+from django_filters import FilterSet, views
 
-from erp_reloaded.forms import InputField, SelectField, CountrySelectField, SubmitField, SearchForm
 from customer.forms import ContactForm
 from customer.models import ActivityArea, BusinessSize, Country, Customer
+from erp_reloaded.forms import (CountrySelectField, InputField, SearchForm,
+                                SelectField)
 
 
 class FilterCustomer(FilterSet):
@@ -29,7 +30,6 @@ class ListCustomer(views.FilterView):
             SelectField('size', options=BusinessSize.objects.all()),
             CountrySelectField("country", options=Country.objects.all(), clearable=True),
         ])
-        
         return context
 
 

@@ -3,9 +3,9 @@ from django.contrib.auth.models import Group
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import ListView, UpdateView
-from django_filters import views, FilterSet
+from django_filters import FilterSet, views
 
-from erp_reloaded.forms import InputField, SelectField, CountrySelectField, SubmitField, SearchForm
+from erp_reloaded.forms import InputField, SearchForm
 from user.forms import UploadDocumentForm
 from user.models import Document, DocumentName, User
 
@@ -37,7 +37,7 @@ class ListArchiveUser(views.FilterView):
             InputField('name'),
         ])
         return context
-    
+
 
 class ShowUser(UpdateView):
     model = User
