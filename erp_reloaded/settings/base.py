@@ -14,6 +14,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'django_filters',
     'phonenumber_field',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 LOCAL_APPS = [
@@ -21,7 +22,7 @@ LOCAL_APPS = [
     'customer.apps.CustomerConfig',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
