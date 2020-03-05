@@ -1,0 +1,13 @@
+<div class="field">
+  {% if field.label %}<label for="{{field.name}}">{{field.label}}</label>{% endif %}
+  <div class="ui search {% if field.clearable %}clearable{% endif %} selection dropdown" name="{{field.name}}" id="{{field.name}}">
+    <input type="hidden" name="{{field.name}}">
+    <i class="dropdown icon"></i>
+    <div class="default text">Select Country</div>
+    <div class="menu">
+      {% for country in field.options %}
+        <div class="item" data-value="{{country.id}}"><i class="{{country.icon}} flag"></i>{{country.name}}</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

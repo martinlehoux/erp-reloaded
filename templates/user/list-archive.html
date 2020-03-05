@@ -1,6 +1,9 @@
 {% extends 'user/base.html' %}
 
-{% block main %}
+{% block view %}
+
+{% include search_form.template %}
+
 <div class="ui horizontal divider">User archive</div>
 <table class="ui celled table">
   <thead>
@@ -18,7 +21,7 @@
       <td>{{user.first_name}} {{user.last_name}}</td>
       <td>
       {% for group in user.groups.all %}
-        <div class="ui label">{{group.name|capfirst}}</div>
+        <div class="ui label">{{group.name}}</div>
       {% endfor %}
       </td>
       <td>{{user.date_left}}</td>
@@ -47,4 +50,4 @@
   </tfoot>
   </tbody>
 </table>
-{% endblock main %}
+{% endblock view %}

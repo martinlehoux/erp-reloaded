@@ -1,0 +1,34 @@
+<div class="ui modal" id="create-contact-modal">
+  <div class="header">Create a contact</div>
+  <div class="content">
+    <form action="{% url 'customer:create-contact' customer.id %}" method="post" class="ui form" id="create-contact-form">
+    {% csrf_token %}
+      <div class="field">
+        <label for="first_name">First name</label>
+        <input type="text" name="first_name" id="first_name">
+      </div>
+      <div class="field">
+        <label for="last_name">Last name</label>
+        <input type="text" name="last_name" id="last_name">
+      </div>
+      <div class="field">
+        <label for="office">Office</label>
+        <input type="text" name="office" id="office">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+      </div>
+      <div class="field">
+        <label for="phone_number">Phone number</label>
+        <input type="text" name="phone_number" id="phone_number">
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <button class="ui negative button">Cancel</button>
+    <input class="ui positive button" type="submit" form="create-contact-form"/>
+  </div>
+</div>
+<script>
+</script>

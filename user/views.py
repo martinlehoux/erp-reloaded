@@ -1,31 +1,47 @@
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
-from django.views.generic import DeleteView, ListView, UpdateView
+from django.urls import reverse
+from django.views.generic import ListView, UpdateView
+from django_filters import FilterSet, views
 
+from erp_reloaded.forms import InputField, SearchForm
 from user.forms import UploadDocumentForm
 from user.models import Document, DocumentName, User
 
 
-class UserActiveList(ListView):
+class FilterUser(FilterSet):
+    class Meta:
+        model = User
+        fields = ['username']
+
+
+class ListActiveUser(ListView):
     queryset = User.objects.filter(is_active=True)
     context_object_name = 'user_set'
-    template_name = 'user/user_list_active.html'
+    template_name = 'user/list-active.html'
     ordering = ['username']
 
 
-class UserArchiveList(ListView):
+class ListArchiveUser(views.FilterView):
     queryset = User.objects.filter(is_active=False)
     paginate_by = 25
     context_object_name = 'user_set'
-    template_name = 'user/user_list_archive.html'
+    template_name = 'user/list-archive.html'
+    filterset_class = FilterUser
     ordering = ['-date_left']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = SearchForm([
+            InputField('name'),
+        ])
+        return context
 
-class UserShow(UpdateView):
+
+class ShowUser(UpdateView):
     model = User
-    template_name = 'user/user_show.html'
+    template_name = 'user/show.html'
     context_object_name = 'user'
     fields = ['is_active', 'groups', 'date_left']
 
@@ -35,8 +51,8 @@ class UserShow(UpdateView):
         return context
 
 
-class UserMe(UpdateView):
-    template_name = 'user/user_me.html'
+class MeUser(UpdateView):
+    template_name = 'user/me.html'
     context_object_name = 'user'
     fields = ['first_name', 'last_name', 'email', 'phone_number', 'social_security_number', 'biography', 'photo']
 
@@ -68,8 +84,3 @@ def upload_document(request):
     document = form.save()
     messages.success(request, f"Uploaded {document.name}")
     return redirect(reverse('user:me'))
-
-
-class UserDelete(DeleteView):
-    model = User
-    success_url = reverse_lazy('user:list-active')

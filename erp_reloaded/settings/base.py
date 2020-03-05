@@ -17,7 +17,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'customer.apps.CustomerConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -37,7 +38,7 @@ ROOT_URLCONF = 'erp_reloaded.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

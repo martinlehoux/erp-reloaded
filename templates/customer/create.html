@@ -1,0 +1,73 @@
+{% extends 'customer/base.html' %}
+
+{% block view %}
+<div class="ui segment">
+  <h2 class="ui header">Create a customer</h2>
+
+  <form action="{% url 'customer:create' %}" method="post" class="ui form" enctype="multipart/form-data">
+  {% csrf_token %}
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div class="field">
+      <label for="website">Website</label>
+      <input type="url" name="website" id="website">
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="activity_area_set">Activity areas</label>
+        <select name="activity_area_set" id="activity_area_set" class="ui fluid multiple search dropdown">
+          <option value="">Activity areas</option>
+          {% for activity_area in activity_area_set %}
+          <option value="{{activity_area.id}}">{{activity_area.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="eight wide field">
+        <label for="size">Business size</label>
+        <select name="size" id="size" class="ui fluid dropdown">
+          <option value="">Business size</option>
+          {% for business_size in business_size_set %}
+          <option value="{{business_size.id}}">{{business_size.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <h4 class="ui dividing header">Address</h4>
+
+    <div class="field">
+      <label for="address">Street</label>
+      <input type="text" name="address" id="address">
+    </div>
+    <div class="fields">
+      <div class="four wide field">
+        <label for="zip_code">Zip code</label>
+        <input type="text" name="zip_code" id="zip_code">
+      </div>
+      <div class="six wide field">
+        <label for="city">City</label>
+        <input type="text" name="city" id="city">
+      </div>
+      <div class="six wide field">
+        <label for="country">Country</label>
+        <div class="ui search selection dropdown" name="country" id="country">
+          <input type="hidden" name="country">
+          <i class="dropdown icon"></i>
+          <div class="default text">Select Country</div>
+          <div class="menu">
+            {% for country in country_set %}
+              <div class="item" data-value="{{country.id}}"><i class="{{country.icon}} flag"></i>{{country.name}}</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <input type="submit" class="ui button">
+    </div>
+  </form>
+</div>
+{% endblock view %}

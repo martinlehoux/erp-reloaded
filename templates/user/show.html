@@ -1,11 +1,11 @@
 {% extends 'user/base.html' %}
 
-{% block main %}
+{% block view %}
 {% with user.groups.all as user_groups %}
 
 {% with False as your_profile %}
-{% include 'user/user_detail.html' %}
-{% include 'user/user_show_modal.html' %}
+{% include 'user/detail.html' %}
+{% include 'user/modals/show.html' %}
 {% endwith %}
 
 
@@ -13,4 +13,4 @@
 $('#edit-user-button').click(() => $('#edit-user-modal').modal('show'))
 </script>
 {% endwith %}
-{% endblock main %}
+{% endblock view %}

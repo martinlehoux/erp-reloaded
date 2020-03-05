@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block app %}
+<div class="ui grid">
+  <div class="three wide column">
+    {% include 'customer/menu.html' %}
+  </div>
+  <div class="twelve wide column">
+    {% block view %}
+    {% endblock view %}
+  </div>
+</div>
+{% endblock app %}

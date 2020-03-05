@@ -9,16 +9,9 @@
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.4/semantic.min.js" integrity="sha256-WTQFsw74IXBZWoXA8AnKpma22rW8qdBQvbiMgDEpKew=" crossorigin="anonymous"></script>
-{% include 'user/navbar.html' %}
-<div class="ui grid">
-  <div class="three wide column">
-    {% include 'user/menu.html' %}
-  </div>
-  <div class="twelve wide column">
-      {% block main %}
-      {% endblock main %}
-  </div>
-</div>
+{% include 'navbar.html' %}
+{% block app %}
+{% endblock app %}
 
   {% for title, error in form.errors.items %}
   <script>
@@ -39,6 +32,10 @@
   })
   </script>
   {% endfor %}
+<div>Icons made by <a href="https://www.flaticon.com/authors/tomas-knop" title="Tomas Knop">Tomas Knop</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
+<script>
+$('.ui.dropdown').dropdown()
+</script>
 </body>
 </html>

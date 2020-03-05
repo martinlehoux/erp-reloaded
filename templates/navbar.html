@@ -1,7 +1,11 @@
-<nav class="ui two item menu">
+<nav class="ui three item menu">
   <a href="{% url 'user:list-active' %}" class="item">
     <i class="users icon"></i>
     Users
+  </a>
+  <a href="{% url 'customer:list' %}" class="item">
+    <i class="industry icon"></i>
+    Customers
   </a>
   <a href="{% url 'admin:index' %}" class="item">
     <i class="cogs icon"></i>
