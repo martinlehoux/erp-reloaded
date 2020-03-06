@@ -8,8 +8,10 @@ ALLOWED_HOSTS = []
 TIME_ZONE = 'America/Los_Angeles'
 SECRET_KEY = '1ey4!o_$yejljvfcc@z&nevnh37wnlvdpii$3#xbku69)!=s6e'
 
-INSTALLED_APPS.append('debug_toolbar')
-MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
+INSTALLED_APPS.extend(['debug_toolbar'])
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+] + MIDDLEWARE
 INTERNAL_IPS = ['127.0.0.1']
 
 DATABASES = {
