@@ -16,7 +16,7 @@
   {% for user in user_set %}
     <tr class="{% if user.issues %}error{% endif %}">
       <td><a href="{% url 'user:show' user.id %}">@{{user.username}}</a></td>
-      <td>{{user.first_name}} {{user.last_name}}</td>
+      <td>{{user.full_name}}</td>
       <td>
       {% for group in user.groups.all %}
         <div class="ui label">{{group.name}}</div>

@@ -5,6 +5,8 @@ from django.db import models
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 
+from erp_reloaded.mixins.models import Person
+
 
 class UploadTo:
     def __init__(self, fieldname):
@@ -25,7 +27,7 @@ def upload_document_to(document, filename):
     return f'user/{document.user.username}/{document.name}{ext}'
 
 
-class User(AbstractUser):
+class User(Person, AbstractUser):
     photo = models.ImageField(upload_to=UploadTo('photo'), null=True, blank=True)
     social_security_number = models.CharField(max_length=64, blank=True)
     phone_number = PhoneNumberField(blank=True, null=True)
