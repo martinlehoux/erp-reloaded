@@ -1,0 +1,50 @@
+<div class="ui modal" id="create-exchange-modal">
+  <div class="header">Create an exchange</div>
+  <div class="content">
+    <form action="{% url 'customer:create-exchange' customer.id %}" method="post" class="ui form" id="create-exchange-form">
+    {% csrf_token %}
+      <div class="field">
+        <label for="user">User</label>
+        <select name="user" id="user" class="ui dropdown">
+          <option value="">User</option>
+          {% for user in user_set %}
+          <option value="{{user.id}}" {% if user == request.user %}selected{% endif %}>{{user.full_name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="">Contact</label>
+        <select name="contact" id="contact" class="ui dropdown">
+          <option value="">Contact</option>
+          {% for contact in contact_set %}
+          <option value="{{contact.id}}">{{contact.full_name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="date">Date</label>
+        <div class="ui calendar">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input type="text" placeholder="Date" name="date" value="{% now "DATE_FORMAT" %}" autocomplete="off">
+            <button type="button" class="ui icon button" onclick="$('.ui.calendar').calendar({type: 'date', today: true})">
+              <i class="redo icon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea name="message" id="message"></textarea>
+      </div>
+
+    </form>
+  </div>
+  <div class="actions">
+    <button class="ui negative button">Cancel</button>
+    <input class="ui positive button" type="submit" form="create-exchange-form"/>
+  </div>
+</div>

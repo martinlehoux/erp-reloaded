@@ -1,8 +1,11 @@
+import datetime
 import os
 
 from django.db import models
 from django.shortcuts import reverse
 from phonenumber_field.modelfields import PhoneNumberField
+
+from erp_reloaded.mixins.models import Person
 
 
 def upload_logo_to(customer, filename):
@@ -63,7 +66,7 @@ class BusinessSize(models.Model):
         return f"{self.short} - {self.name}"
 
 
-class Contact(models.Model):
+class Contact(Person, models.Model):
     first_name = models.CharField(max_length=256)
     last_name = models.CharField(max_length=256)
     office = models.CharField(max_length=256, blank=True)
@@ -73,3 +76,16 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.customer})"
+
+
+class Exchange(models.Model):
+    class Meta:
+        ordering = ['-date', '-id']
+
+    date = models.DateField(default=datetime.date.today)
+    contact = models.ForeignKey(to='customer.Contact', on_delete=models.CASCADE)
+    user = models.ForeignKey(to='user.User', on_delete=models.SET)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.contact} @{self.date:%B %d, %Y}"

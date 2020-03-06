@@ -8,4 +8,18 @@
       <p><i class="phone icon"></i>{{contact.phone_number}}</p>
     </div>
   </div>
+  <div class="content" style="overflow: auto; max-height: 20vh;">
+    <div class="header">{{contact.exchange_set.count}} exchanges</div>
+    <div class="ui accordion">
+    {% for exchange in contact.exchange_set.all %}
+      <div class="title">
+        <i class="dropdown icon"></i>
+        {{exchange.date}} - {{exchange.user.full_name}}
+      </div>
+      <div class="content">
+        <p>{{exchange.message}}</p>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
 </div>
