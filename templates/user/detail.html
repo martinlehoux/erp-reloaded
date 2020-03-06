@@ -9,7 +9,7 @@
     {% if your_profile %}
       Your profile
     {% else %}
-      {{user.first_name}} {{user.last_name}}'s profile
+      {{user.full_name}}'s profile
     {% endif %}
     <button id="edit-user-button" class="ui right floated button">Edit</button>
   </h2>
@@ -24,7 +24,7 @@
       {% endif %}
       </div>
       <div class="content">
-        <p class="header">{{user.first_name}} {{user.last_name}}</p>
+        <p class="header">{{user.full_name}}</p>
         <div class="meta">
           <i class="user circle icon"></i>
           <span>{{user.username}}</span>
@@ -56,7 +56,7 @@
       Your documents
       <button id="upload-user-button" class="ui right floated button">Upload</a>
     {% else %}
-      {{user.first_name}} {{user.last_name}}'s documents
+      {{user.full_name}}'s documents
     {% endif %}
     </h2>
   <div>

@@ -1,13 +1,15 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_http_methods
 from django.views.generic import CreateView, UpdateView
 from django_filters import FilterSet, views
 
-from customer.forms import ContactForm
+from customer.forms import ContactForm, ExchangeForm
 from customer.models import ActivityArea, BusinessSize, Country, Customer
 from erp_reloaded.forms import (CountrySelectField, InputField, SearchForm,
                                 SelectField)
+from user.models import User
 
 
 class FilterCustomer(FilterSet):
@@ -57,12 +59,13 @@ class ShowCustomer(UpdateView):
         context['activity_area_set'] = ActivityArea.objects.all()
         context['business_size_set'] = BusinessSize.objects.all()
         context['country_set'] = Country.objects.all()
+        context['contact_set'] = self.object.contact_set.prefetch_related('exchange_set', 'exchange_set__user').all()
+        context['user_set'] = User.objects.filter(is_active=True)
         return context
 
 
+@require_http_methods(["POST"])
 def create_contact(request, customer_pk):
-    if request.method != 'POST':
-        return redirect(reverse_lazy('customer:show', kwargs={'pk': customer_pk}))
     data = request.POST.copy()
     data['customer'] = customer_pk
     form = ContactForm(data)
@@ -71,5 +74,19 @@ def create_contact(request, customer_pk):
             messages.error(request, f"Failed to upload {field}: {message}")
         return redirect(reverse_lazy('customer:show', kwargs={'pk': customer_pk}))
     contact = form.save()
-    messages.success(request, f"Contact {contact} created for customer {contact.customer}")
+    messages.success(request, f"Contact {contact} created")
+    return redirect(reverse_lazy('customer:show', kwargs={'pk': customer_pk}))
+
+
+@require_http_methods(["POST"])
+def create_exchange(request, customer_pk):
+    data = request.POST.copy()
+    data['customer'] = customer_pk
+    form = ExchangeForm(data)
+    if not form.is_valid():
+        for field, message in form.errors.items():
+            messages.error(request, f"Failed to create exchange {field}: {message}")
+        return redirect(reverse_lazy('customer:show', kwargs={'pk': customer_pk}))
+    exchange = form.save()
+    messages.success(request, f"Exchange {exchange} created for customer")
     return redirect(reverse_lazy('customer:show', kwargs={'pk': customer_pk}))

@@ -1,11 +1,25 @@
 <div class="card">
   <div class="content">
     <button class="ui right floated disabled icon button"><i class="remove icon"></i></button>
-    <div class="header">{{contact.first_name}} {{contact.last_name}}</div>
+    <div class="header">{{contact.full_name}}</div>
     <div class="meta">{{contact.office|default:"..."}}</div>
     <div class="description">
       <p><i class="envelope icon"></i><a href="mailto:{{contact.email}}">{{contact.email}}</a></p>
       <p><i class="phone icon"></i>{{contact.phone_number}}</p>
+    </div>
+  </div>
+  <div class="content" style="overflow: auto; max-height: 20vh;">
+    <div class="header">{{contact.exchange_set.count}} exchanges</div>
+    <div class="ui accordion">
+    {% for exchange in contact.exchange_set.all %}
+      <div class="title">
+        <i class="dropdown icon"></i>
+        {{exchange.date}} - {{exchange.user.full_name}}
+      </div>
+      <div class="content">
+        <p>{{exchange.message}}</p>
+      </div>
+    {% endfor %}
     </div>
   </div>
 </div>

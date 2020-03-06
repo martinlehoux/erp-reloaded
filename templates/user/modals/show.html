@@ -1,5 +1,5 @@
 <div class="ui modal" id="edit-user-modal">
-  <div class="header">Edit {{user.first_name}} {{user.last_name}} profile</div>
+  <div class="header">Edit {{user.full_name}} profile</div>
   <div class="content">
     <form id="edit-user-form" action="{% url 'user:show' user.pk %}" method="post" class="ui form">
     {% csrf_token %}

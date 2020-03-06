@@ -46,31 +46,35 @@
         </div>
       </div>
     </div>
+
+    <button id="create-contact-button" class="ui labeled icon button">
+      <i class="add icon"></i>
+      Create contact
+    </button>
+
+    <button id="create-exchange-button" class="ui labeled icon button">
+      <i class="add icon"></i>
+      Add Exchange
+    </button>
   </div>
 </div>
 
 <div class="ui segment">
   <h2 class="ui header">Contacts</h2>
   <div class="ui cards">
-  {% for contact in customer.contact_set.all %}
+  {% for contact in contact_set.all %}
     {% include 'customer/elements/contact-card.html' %}
   {% endfor %}
-    <div class="card">
-      <div class="content">
-        <div class="center aligned header">Create contact</div>
-      </div>
-      <div class="center aligned content">
-        <button id="create-contact-button" class="ui icon button"><i class="add icon"></i></button>
-      </div>
-    </div>
   </div>
 </div>
 
 {% include 'customer/modals/create-contact.html' %}
 {% include 'customer/modals/edit.html' %}
+{% include 'customer/modals/create-exchange.html' %}
 
 <script>
 $('#create-contact-button').click(() => $('#create-contact-modal').modal('show'))
 $('#edit-customer-button').click(() => $('#edit-customer-modal').modal('show'))
+$('#create-exchange-button').click(() => $('#create-exchange-modal').modal('show'))
 </script>
 {% endblock view %}
