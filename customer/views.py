@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_http_methods
 from django.views.generic import CreateView, UpdateView
 from django_filters import FilterSet, views
-from django.views.decorators.http import require_http_methods
 
 from customer.forms import ContactForm, ExchangeForm
 from customer.models import ActivityArea, BusinessSize, Country, Customer
