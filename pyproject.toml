@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-django = "^3.0.7"
+django = "^3.1.9"
 django-filter = "^2.2.0"
 Pillow = "^7.0.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^4.0.0"}
